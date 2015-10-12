@@ -1,0 +1,27 @@
+{
+  "name": "showcase",
+  "version": "0.0.1",
+  "authors": [
+    "tyllo <gmtyllo@gmail.com>"
+  ],
+  "description": "Тестовое задание",
+  "keywords": [
+    "БЭМ",
+    "jade",
+    "scss",
+    "components",
+    "ES2015"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue": "~0.12.16",
+    "nouislider": "~8.0.2"
+  }
+}
