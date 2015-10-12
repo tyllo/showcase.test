@@ -1,0 +1,40 @@
+
+/******************************************
+ *        components/toggle-block
+ =========================================*/
+
+@import '../vars';
+
+.toggle-block--title {
+  $size: rem(20);
+  line-height: $size;
+  cursor: pointer;
+  color: $font-title-color;
+}
+
+.toggle-block--btn {
+  $size: rem(20);
+  display: inline-block;
+  height: $size;
+  width: $size;
+  float: right;
+  cursor: pointer;
+  border: 1px solid lightgray;
+  border-radius: $size;
+  background-image: url(../images/icons/filter.svg);
+  background-repeat: no-repeat;
+  background-size: 70% auto;
+  background-position: center;
+
+  .open & {
+    transform: scaleY(-1);
+  }
+
+}
+
+.toggle-block--content {
+  &.hide {
+    display: none;
+    overflow: hidden;
+  }
+}

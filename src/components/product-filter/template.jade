@@ -1,0 +1,71 @@
+
+// components/product-filter
+
+include ../toggle-block/template
+include ../custom-input/template
+
+#product-filter.product-filter
+
+  // processors
+  section.product-filter--block
+    +toggleBlock('Производитель', 'processor')
+      ul.product-filter--list(v-class="hide : ! processor")
+        li: +input()
+          input(type="checkbox")
+          span Acer(10)
+        li: +input()
+          input(type="checkbox" disabled)
+          span Asus(11)
+        li: +input()
+          input(type="checkbox")
+          span HP(3)
+
+  // price
+  section.product-filter--block
+    +toggleBlock('Цена, руб.', 'price')
+      .product-filter--range
+        input(type="range")
+      .product-filter--input
+        input(type="text")
+        | &#8212;
+        input(type="text")
+
+  // price
+  section.product-filter--block
+    +toggleBlock('Диагональ экрана, дюймы', 'diag')
+      .product-filter--range
+        input(type="range")
+      .product-filter--input
+        input(type="text")
+        | &#8212;
+        input(type="text")
+
+  // memory
+  section.product-filter--block
+    +toggleBlock('Размер оперативной памяти', 'memory')
+      ul.product-filter--list__2(v-class="hide : ! memory")
+        li: +input()
+          input(type="checkbox")
+          span 1024
+        li: +input()
+          input(type="checkbox")
+          span 2048
+        li: +input()
+          input(type="checkbox")
+          span 4096
+        li: +input()
+          input(type="checkbox")
+          span 8192
+
+  // ssd
+  section.product-filter--block
+    +toggleBlock('Наличие SSD', 'ssd')
+      ul.product-filter--list__2(v-class="hide : ! ssd")
+        li: +input('circle')
+          input(type="radio" name="ssd")
+          span Есть
+        li: +input('circle')
+          input(type="radio" name="ssd")
+          span Нет
+
+// /components/product-filter

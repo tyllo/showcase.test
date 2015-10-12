@@ -1,0 +1,16 @@
+
+// components/toggle-block
+
+mixin toggleBlock(title, name)
+  if (name == undefined)
+    - var name = title
+  header(
+      v-on="click: toggle($event, '#{name}')"
+      v-class="open: #{name}, close : !#{name}"
+    )
+    .toggle-block--btn
+    .toggle-block--title!= title
+  .toggle-block--content.hide(v-class="hide : ! #{name}")
+    block
+
+// /components/toggle-block

@@ -1,0 +1,14 @@
+
+// components/custom-input
+
+mixin input(modifer)
+  // модификатор чекбокса
+  - className = 'custom-input--helper'
+  if (modifer != undefined)
+    - className = className + '__' + modifer
+
+  label.custom-input
+    block
+    div(class=className)
+
+// /components/custom-input

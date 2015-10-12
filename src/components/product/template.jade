@@ -1,0 +1,26 @@
+// components/product
+
+ul#products.products
+  template(v-repeat="products | orderBy order reverse | filterBy filter 'availability'")
+    li.product__line(v-if="$index && ($index % 4 == 0) ")
+    li.product__4x
+
+      include ../ballons/template
+
+      img.product--image(v-attr="src: 'assets/images/' + image, alt: brend + ' ' + model")
+      a.product--title__link(href="#") Ноутбук {{brend + ' ' + model}}
+      //- .product--description {{description}}
+
+      include ../rating/template
+
+      .product--price
+        .product--price__old {{priceOld | currencyRU}} р.
+        .product--price__new {{price | currencyRU}} р.
+      a.product--basket__btn(href="#") В корзину
+
+      footer.product--footer
+        .product--availability__check(v-show="availability") В наличии
+        .product--availability__close(v-show="! availability") Под заказ
+        label.product--input__plus #[input(type="checkbox")] #[span Сравнить]
+
+// /components/product
