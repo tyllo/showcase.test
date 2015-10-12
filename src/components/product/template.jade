@@ -1,0 +1,20 @@
+// components/product
+
+ul#products.products
+  li.product(v-repeat="products | orderBy order reverse | filterBy filter 'availability'")
+    include ../ballons/template
+
+    header
+      a.product--title(href="#") {{brend + ' ' + model}}
+
+    img.product--image(v-attr="src: 'assets/images/' + image, alt: brend + ' ' + model")
+    .product--description {{description}}
+    .product--price {{price | currencyRU ''}} р.
+
+    footer.product--footer
+      .product--availability.product--availability__check(v-show="availability") Наличие
+      .product--availability.product--availability__close(v-show="! availability") Отсутствует
+      .product--basket.product--basket__circle В корзину
+      label.product--input #[input(type="checkbox")] Сравнить
+
+// /components/product

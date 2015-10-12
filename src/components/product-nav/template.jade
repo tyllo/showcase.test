@@ -1,0 +1,18 @@
+// components/product-sort
+
+mixin a(model)
+  a(href="#"
+    v-class="sort-up : toggleClass('#{model}', true), sort-down : toggleClass('#{model}', false)"
+    v-on="click: toggleOrder('#{model}')"
+  ): block
+
+#product-nav.product-nav
+  .product-nav--block Сортировать по:
+  .product-nav--block: +a('novelty') новинкам
+  .product-nav--block: +a('price') цене
+  .product-nav--block: +a('bestseller') популярности
+  .product-nav--block: label
+      input(type="checkbox" v-on="click: toggleFilter()")
+      | &nbsp; В наличии
+
+// /components/product-sort

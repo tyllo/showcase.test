@@ -1,0 +1,60 @@
+// components/product-filter
+
+#product-filter.product-filter
+  .product-filter--title Фильтр товара
+
+  // block brands
+  section.product-filter--block
+    header
+      .product-filter--block--title Производитель
+      .product-filter--block--data(data-title="Описание блока с производителями") ?
+    ul.product-filter--block--list(v-class="hide : ! brend")
+      li(v-repeat="brend in brends"): label
+        input(type="checkbox" v-attr="name: brend")
+        | {{brend}}
+      // второй раз что бы было в 2 раза больше брендов
+      li(v-repeat="brend in brends"): label
+        input(type="checkbox" v-attr="name: brend")
+        | {{brend}}
+    footer
+      a.product-filter--block--link(href="#" v-on="click: toggle($event, 'brend')")
+        | {{ !brend ? 'Показать все' : 'Скрыть'}}
+
+  // block prices
+  section.product-filter--block
+    header
+      .product-filter--block--title Цена (р.)
+      .product-filter--block--data(data-title="Описание блока с ценой") ?
+    .product-filter--block--input
+      input(type="text")
+      span -
+      input(type="text")
+    .product-filter--block--range
+      input(type="range")
+
+  // block OSs
+  section.product-filter--block.hide
+    header
+      .product-filter--block--title
+        a.product-filter--block--title--link(
+          href="#" v-on="click: toggle($event,'OS')" v-class="open: OS, close : !OS"
+        ) Операционная система
+      .product-filter--block--data(data-title="Описание блока с операционной системой") ?
+    ul.product-filter--block--list(v-class="hide : ! OS")
+      li(v-repeat="OS in OSs"): label #[input(type="checkbox")] {{OS}}
+
+  // block processors
+  section.product-filter--block
+    header
+      .product-filter--block--title
+        a.product-filter--block--title--link(
+          href="#" v-on="click: toggle($event, 'processor')" v-class="open: processor, close : !processor"
+        ) Количество ядер
+      .product-filter--block--data(data-title="Описание блока с количеством ядер") ?
+    ul.product-filter--block--list(v-class="hide : ! processor")
+      li: label #[input(type="checkbox")] 1
+      li: label #[input(type="checkbox")] 2
+      li: label #[input(type="checkbox")] 3
+      li: label #[input(type="checkbox")] 4
+
+// /components/product-filter

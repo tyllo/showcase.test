@@ -1,0 +1,16 @@
+
+// components/mixins
+
+mixin jsonBufer(data)
+  - var oldbuf = buf; buf = []
+  block
+  - data = JSON.parse(buf.join(''))
+  - buf = oldbuf
+
+mixin json(data)
+  if (data == 'phones')
+    include ../api/phones
+  if (data == 'notebooks')
+    include ../api/notebooks
+
+//- /components/mixins

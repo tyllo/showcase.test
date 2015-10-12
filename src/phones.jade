@@ -1,0 +1,30 @@
+doctype
+html(lang="ru")
+  head
+    meta(charset="utf8")
+    title Телефоны
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    meta(name="description" content="Тестовое задание")
+    //- meta(name="keywords" content="gulp, jade, sass, БЭМ, vue.js, ES2015")
+    link(rel="stylesheet" href="assets/css/style.css")
+
+  body
+    .grid--container
+      block header
+
+      aside.grid--aside
+        include components/product-filter/template
+
+      section#content.grid--content
+        include components/product-nav/template
+        include components/product/template
+
+      block footer
+
+    script(type='text/javascript').
+      var app = {
+        products: #[include api/phones],
+      }
+    script(type='text/javascript' src='assets/js/vendor/vue.min.js')
+    script(type='text/javascript' src='assets/js/script.js')

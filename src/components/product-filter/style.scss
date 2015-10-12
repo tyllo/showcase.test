@@ -1,0 +1,150 @@
+
+/******************************************
+ *         components/product-aside
+ =========================================*/
+
+@import '../vars';
+
+@mixin font-icons() {
+  margin-right: rem(4);
+  line-height: 80%;
+  color: inherit;
+  font-family: 'icon';
+  font-size: 50%;
+}
+
+.product-filter {
+  display: block;
+  box-shadow: 0 0 .2rem rgba(0,0,0,0.2);
+}
+
+//////// заголовок ////////
+
+.product-filter--title {
+  padding: rem(12);
+  display: block;
+  font-size: 1rem;
+  background-color: $bg-color;
+  color: $font-description-color;
+  font-weight: 500;
+  font-size: 120%;
+}
+
+//////// секция ////////
+
+.product-filter--block {
+  position: relative;
+  padding: rem(20);
+  font-size: rem(14);
+  border: 1px solid $border-color;
+}
+
+//////// заголовок секции ////////
+
+.product-filter--block--title {
+  display: inline-block;
+  margin-bottom: rem(20);
+  font-weight: bold;
+  &--link {
+    border-bottom: 1px dashed $font-description-color;
+    color: $font-description-color;
+    &:hover {
+      color: black;
+    }
+  }
+}
+
+//////// блок с вопросиком ////////
+
+.product-filter--block--data {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  padding: .2rem .4rem;
+  color: $border-color;
+  cursor: pointer;
+  border: 1px dashed $border-color;
+  border-right: none;
+  border-radius: 2px;
+
+  &:hover::after {
+    position: absolute;
+    top: 120%; left: 0;
+    box-shadow: 0 0 .4rem rgba(0,0,0,0.2);
+    color: black;
+    padding: rem(10);
+    z-index: 999;
+    content: attr(data-title);
+    background-color: $bg-color;
+    border-radius: 4px;
+  }
+}
+
+//////// блок с чекбоксами ////////
+
+.product-filter--block--list {
+  @include clearfix;
+  display: block;
+  line-height: 2;
+  li {
+    float: left;
+    display: block;
+    width: 50%;
+  }
+  &.hide {
+    display: none;
+  }
+}
+
+.product-filter--block--link {
+  border-bottom: 1px dashed $border-color;
+}
+
+.product-filter--block--input {
+  @include clearfix;
+  margin-bottom: rem(20);
+  text-align: center;
+  line-height: 1.5rem;
+}
+
+//////// блок с range ////////
+
+.product-filter--block--input input {
+  display: inline-block;
+  width: 45%;
+  padding: rem(4);
+  border: 1px solid $border-color;
+
+  &:first-child {
+    float: left;
+  }
+
+  &:last-child {
+    float: right;
+  }
+
+  &:focus {
+    border-color: $color-blue;
+    box-shadow: 0 0 .2rem rgba( $color-blue ,.6 );
+  }
+}
+
+.product-filter--block--range input {
+  width: 100%;
+  margin: 0;
+  background: transparent;
+  border: 4px solid transparent;
+  color: transparent;
+}
+
+.product-filter--block--title--link {
+  &.open { color: #000; }
+  &.open:before {
+    @include font-icons();
+    content: 'd';
+  }
+  &.close:before {
+    @include font-icons();
+    content: 'f';
+  }
+}

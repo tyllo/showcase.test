@@ -1,0 +1,42 @@
+
+/******************************************
+ *            components/card
+ =========================================*/
+
+@import '../vars';
+
+[class^="ballons"] {
+  width: rem(100);
+  position: absolute;
+  margin-top: rem(16);
+  font-size: rem(10);
+  font-weight: bold;
+  color: #000;
+}
+
+.ballons {
+  &__rotate {
+    margin-top: rem(80);
+    transform: rotate(-23deg);
+  }
+}
+
+.ballon--novelty,
+.ballon--bestseller {
+  display: block;
+  padding: 0 rem(4);
+
+  margin: rem(4);
+  height: rem(20);
+  line-height: rem(20);
+
+  background-repeat: no-repeat;
+}
+
+.ballon--novelty {
+  background-image: url(../images/icons/ballon-novelty.svg);
+}
+
+.ballon--bestseller {
+  background-image: url(../images/icons/ballon-bestseller.svg);
+}
