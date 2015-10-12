@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf8">
+    <title>Ноутбуки</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Тестовое задание">
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div class="grid--container">
+      <!-- components/product-sort-->
+      <!-- components/custom-input-->
+      <!-- /components/custom-input-->
+      <div id="product-nav" class="product-nav">
+        <div class="product-nav--block__title">Ноутбуки</div>
+        <div class="product-nav--block">Сортировать по:</div>
+        <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('novelty', true), sort-down : toggleClass('novelty', false)" v-on="click: toggleOrder('novelty')">новинкам</a>
+        </div>
+        <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('price', true), sort-down : toggleClass('price', false)" v-on="click: toggleOrder('price')">цене</a>
+        </div>
+        <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('bestseller', true), sort-down : toggleClass('bestseller', false)" v-on="click: toggleOrder('bestseller')">популярности</a>
+        </div>
+        <div class="product-nav--block">
+                <!-- модификатор чекбокса-->
+                <label class="custom-input">
+                  <input type="checkbox" v-on="click: toggleFilter()"><span>В наличии</span>
+                  <div class="custom-input--helper__small"></div>
+                </label>
+        </div>
+        <div class="product-nav--block"><a href="#" class="product-nav--sort-plitka"></a></div>
+        <div class="product-nav--block"><a href="#" class="product-nav--sort-list"></a></div>
+      </div>
+      <!-- /components/product-sort-->
+      <aside class="grid--aside">
+        <!-- components/product-filter-->
+        <!-- components/toggle-block-->
+        <!-- /components/toggle-block-->
+        <!-- components/custom-input-->
+        <!-- /components/custom-input-->
+        <div id="product-filter" class="product-filter">
+          <!-- processors-->
+          <section class="product-filter--block">
+                    <header v-on="click: toggle($event, 'processor')" v-class="open: processor, close : !processor">
+                      <div class="toggle-block--btn"></div>
+                      <div class="toggle-block--title">Производитель</div>
+                    </header>
+                    <div v-class="hide : ! processor" class="toggle-block--content hide">
+                      <ul v-class="hide : ! processor" class="product-filter--list">
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>Acer(10)</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox" disabled><span>Asus(11)</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>HP(3)</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                      </ul>
+                    </div>
+          </section>
+          <!-- price-->
+          <section class="product-filter--block">
+                    <header v-on="click: toggle($event, 'price')" v-class="open: price, close : !price">
+                      <div class="toggle-block--btn"></div>
+                      <div class="toggle-block--title">Цена, руб.</div>
+                    </header>
+                    <div v-class="hide : ! price" class="toggle-block--content hide">
+                      <div class="product-filter--range">
+                        <input type="range">
+                      </div>
+                      <div class="product-filter--input">
+                        <input type="text">&#8212;
+                        <input type="text">
+                      </div>
+                    </div>
+          </section>
+          <!-- price-->
+          <section class="product-filter--block">
+                    <header v-on="click: toggle($event, 'diag')" v-class="open: diag, close : !diag">
+                      <div class="toggle-block--btn"></div>
+                      <div class="toggle-block--title">Диагональ экрана, дюймы</div>
+                    </header>
+                    <div v-class="hide : ! diag" class="toggle-block--content hide">
+                      <div class="product-filter--range">
+                        <input type="range">
+                      </div>
+                      <div class="product-filter--input">
+                        <input type="text">&#8212;
+                        <input type="text">
+                      </div>
+                    </div>
+          </section>
+          <!-- memory-->
+          <section class="product-filter--block">
+                    <header v-on="click: toggle($event, 'memory')" v-class="open: memory, close : !memory">
+                      <div class="toggle-block--btn"></div>
+                      <div class="toggle-block--title">Размер оперативной памяти</div>
+                    </header>
+                    <div v-class="hide : ! memory" class="toggle-block--content hide">
+                      <ul v-class="hide : ! memory" class="product-filter--list__2">
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>1024</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>2048</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>4096</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="checkbox"><span>8192</span>
+                                    <div class="custom-input--helper"></div>
+                                  </label>
+                        </li>
+                      </ul>
+                    </div>
+          </section>
+          <!-- ssd-->
+          <section class="product-filter--block">
+                    <header v-on="click: toggle($event, 'ssd')" v-class="open: ssd, close : !ssd">
+                      <div class="toggle-block--btn"></div>
+                      <div class="toggle-block--title">Наличие SSD</div>
+                    </header>
+                    <div v-class="hide : ! ssd" class="toggle-block--content hide">
+                      <ul v-class="hide : ! ssd" class="product-filter--list__2">
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="radio" name="ssd"><span>Есть</span>
+                                    <div class="custom-input--helper__circle"></div>
+                                  </label>
+                        </li>
+                        <li>
+                                  <!-- модификатор чекбокса-->
+                                  <label class="custom-input">
+                                    <input type="radio" name="ssd"><span>Нет</span>
+                                    <div class="custom-input--helper__circle"></div>
+                                  </label>
+                        </li>
+                      </ul>
+                    </div>
+          </section>
+        </div>
+        <!-- /components/product-filter-->
+      </aside>
+      <section id="content" class="grid--content">
+        <!-- components/product-->
+        <ul id="products" class="products">
+          <template v-repeat="products | orderBy order reverse | filterBy filter 'availability'">
+            <li v-if="$index &amp;&amp; ($index % 4 == 0) " class="product__line"></li>
+            <li class="product__4x">
+              <!-- components/ballons-->
+              <header class="ballons">
+                <div v-show="novelty" class="ballon--novelty">НОВИНКА</div>
+                <div v-show="bestseller" class="ballon--bestseller">ХИТ</div>
+              </header>
+              <!-- /components/ballons--><img v-attr="src: 'assets/images/' + image, alt: brend + ' ' + model" class="product--image"><a href="#" class="product--title__link">Ноутбук {{brend + ' ' + model}}</a>
+              <!-- components/rating-->
+              <div class="rating">
+                <div v-class="'rating--stars__' + rating"><span></span> <span></span> <span></span> <span></span> <span></span></div><a href="#" class="rating--link">{{review}}</a>
+              </div>
+              <!-- /components/rating-->
+              <div class="product--price">
+                <div class="product--price__old">{{priceOld | currencyRU}} р.</div>
+                <div class="product--price__new">{{price | currencyRU}} р.</div>
+              </div><a href="#" class="product--basket__btn">В корзину</a>
+              <footer class="product--footer">
+                <div v-show="availability" class="product--availability__check">В наличии</div>
+                <div v-show="! availability" class="product--availability__close">Под заказ</div>
+                <label class="product--input__plus">
+                  <input type="checkbox"> <span>Сравнить</span>
+                </label>
+              </footer>
+            </li>
+          </template>
+        </ul>
+        <!-- /components/product-->
+        <!-- components/card-->
+        <nav id="pagination" class="pagination"><a href="#" class="pagination--link__active">1</a><a href="#" class="pagination--link">2</a><a href="#" class="pagination--link">3</a><a href="#" class="pagination--link">4</a><a href="#" class="pagination--link">5</a><a href="#" class="pagination--link">Следующая страница &rarr;</a></nav>
+        <!-- /components/card-->
+      </section>
+    </div>
+    <script type="text/javascript">
+      var app = {
+        url: 'api/noteboks.html',
+        products: [{"brend":"Acer","model":"Aspire E1-532-29572G50Mnkk","image":"notebooks/1.jpg","rating":1,"priceOld":57530,"price":16800,"review":"Всего 31 отзыв","availability":true,"novelty":true,"bestseller":true},{"brend":"HP","model":"250 G3 i3 4005U [J4T57EA]","image":"notebooks/2.jpg","rating":2,"priceOld":57530,"price":18600,"review":"Всего 31 отзыв","availability":true,"novelty":false,"bestseller":false},{"brend":"Acer","model":"Packard Bell ENTF71BM-C67U","image":"notebooks/3.jpg","rating":0,"priceOld":57530,"price":19300,"review":"Оставить отзыв","availability":true,"novelty":false,"bestseller":false},{"brend":"Acer","model":"Extensa 2510G-38H2","image":"notebooks/4.jpg","rating":4,"priceOld":57530,"price":21800,"review":"Всего 31 отзыв","availability":true,"novelty":false,"bestseller":false},{"brend":"Acer","model":"Aspire E1-532-29572G50Mnkk","image":"notebooks/5.jpg","rating":2,"priceOld":57530,"price":23700,"review":"Всего 31 отзыв","availability":true,"novelty":false,"bestseller":false},{"brend":"HP","model":"250 G3 i3 4005U [J4T57EA]","image":"notebooks/6.jpg","rating":5,"priceOld":57530,"price":24400,"review":"Всего 31 отзыв","availability":true,"novelty":false,"bestseller":true},{"brend":"Acer","model":"Packard Bell ENTF71BM-C67U","image":"notebooks/7.jpg","rating":2,"priceOld":57530,"price":27800,"review":"Всего 31 отзыв","availability":true,"novelty":false,"bestseller":false},{"brend":"Acer","model":"Extensa 2510G-38H2","image":"notebooks/8.jpg","rating":2,"priceOld":57530,"price":35100,"review":"Всего 31 отзыв","availability":false,"novelty":false,"bestseller":false}],
+      }
+    </script>
+    <script type="text/javascript" src="assets/js/vendor/vue.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+  </body>
+</html>
