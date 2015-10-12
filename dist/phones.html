@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf8">
+    <title>Телефоны</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Тестовое задание">
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div class="grid--container">
+      <aside class="grid--aside">
+        <!-- components/product-filter-->
+        <div id="product-filter" class="product-filter">
+          <div class="product-filter--title">Фильтр товара</div>
+          <!-- block brands-->
+          <section class="product-filter--block">
+            <header>
+              <div class="product-filter--block--title">Производитель</div>
+              <div data-title="Описание блока с производителями" class="product-filter--block--data">?</div>
+            </header>
+            <ul v-class="hide : ! brend" class="product-filter--block--list">
+              <li v-repeat="brend in brends">
+                <label>
+                  <input type="checkbox" v-attr="name: brend">{{brend}}
+                </label>
+              </li>
+              <!-- второй раз что бы было в 2 раза больше брендов-->
+              <li v-repeat="brend in brends">
+                <label>
+                  <input type="checkbox" v-attr="name: brend">{{brend}}
+                </label>
+              </li>
+            </ul>
+            <footer><a href="#" v-on="click: toggle($event, 'brend')" class="product-filter--block--link">{{ !brend ? 'Показать все' : 'Скрыть'}}</a></footer>
+          </section>
+          <!-- block prices-->
+          <section class="product-filter--block">
+            <header>
+              <div class="product-filter--block--title">Цена (р.)</div>
+              <div data-title="Описание блока с ценой" class="product-filter--block--data">?</div>
+            </header>
+            <div class="product-filter--block--input">
+              <input type="text"><span>-</span>
+              <input type="text">
+            </div>
+            <div class="product-filter--block--range">
+              <input type="range">
+            </div>
+          </section>
+          <!-- block OSs-->
+          <section class="product-filter--block hide">
+            <header>
+              <div class="product-filter--block--title"><a href="#" v-on="click: toggle($event,'OS')" v-class="open: OS, close : !OS" class="product-filter--block--title--link">Операционная система</a></div>
+              <div data-title="Описание блока с операционной системой" class="product-filter--block--data">?</div>
+            </header>
+            <ul v-class="hide : ! OS" class="product-filter--block--list">
+              <li v-repeat="OS in OSs">
+                <label>
+                  <input type="checkbox"> {{OS}}
+                </label>
+              </li>
+            </ul>
+          </section>
+          <!-- block processors-->
+          <section class="product-filter--block">
+            <header>
+              <div class="product-filter--block--title"><a href="#" v-on="click: toggle($event, 'processor')" v-class="open: processor, close : !processor" class="product-filter--block--title--link">Количество ядер</a></div>
+              <div data-title="Описание блока с количеством ядер" class="product-filter--block--data">?</div>
+            </header>
+            <ul v-class="hide : ! processor" class="product-filter--block--list">
+              <li>
+                <label>
+                  <input type="checkbox"> 1
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox"> 2
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox"> 3
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox"> 4
+                </label>
+              </li>
+            </ul>
+          </section>
+        </div>
+        <!-- /components/product-filter-->
+      </aside>
+      <section id="content" class="grid--content">
+        <!-- components/product-sort-->
+        <div id="product-nav" class="product-nav">
+          <div class="product-nav--block">Сортировать по:</div>
+          <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('novelty', true), sort-down : toggleClass('novelty', false)" v-on="click: toggleOrder('novelty')">новинкам</a>
+          </div>
+          <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('price', true), sort-down : toggleClass('price', false)" v-on="click: toggleOrder('price')">цене</a>
+          </div>
+          <div class="product-nav--block"><a href="#" v-class="sort-up : toggleClass('bestseller', true), sort-down : toggleClass('bestseller', false)" v-on="click: toggleOrder('bestseller')">популярности</a>
+          </div>
+          <div class="product-nav--block">
+            <label>
+              <input type="checkbox" v-on="click: toggleFilter()">&nbsp; В наличии
+            </label>
+          </div>
+        </div>
+        <!-- /components/product-sort-->
+        <!-- components/product-->
+        <ul id="products" class="products">
+          <li v-repeat="products | orderBy order reverse | filterBy filter 'availability'" class="product">
+            <!-- components/ballons-->
+            <header class="ballons__rotate">
+              <div v-show="novelty" class="ballon--novelty">НОВИНКА</div>
+              <div v-show="bestseller" class="ballon--bestseller">ХИТ</div>
+            </header>
+            <!-- /components/ballons-->
+            <header><a href="#" class="product--title">{{brend + ' ' + model}}</a></header><img v-attr="src: 'assets/images/' + image, alt: brend + ' ' + model" class="product--image">
+            <div class="product--description">{{description}}</div>
+            <div class="product--price">{{price | currencyRU ''}} р.</div>
+            <footer class="product--footer">
+              <div v-show="availability" class="product--availability product--availability__check">Наличие</div>
+              <div v-show="! availability" class="product--availability product--availability__close">Отсутствует</div>
+              <div class="product--basket product--basket__circle">В корзину</div>
+              <label class="product--input">
+                <input type="checkbox"> Сравнить
+              </label>
+            </footer>
+          </li>
+        </ul>
+        <!-- /components/product-->
+      </section>
+    </div>
+    <script type="text/javascript">
+      var app = {
+        products: [{"brend":"Apple","model":"iPhone 5S 16Gb","image":"phones/1.jpg","description":"GSM, LTE, смартфон, iOS 7, вес 112 г, ШхВхТ 58.6x123.8x7.6 мм, экран 4\", 61136, Bluetooth, Wi-Fi, GPS, ГЛОНАСС, фотокама..","OS":"iOS","price":24990,"availability":true,"novelty":false,"bestseller":false},{"brend":"Apple","model":"iPhone 6 16Gb","image":"phones/2.jpg","description":"GSM, LTE-A, смартфон, iOS 8, вес 129 г, ШхВхТ 67x138.1x6.9 м экран 4.7\", 750x1334, Bluetooth, NFC, Wi-Fi, GPS, ГЛОНАСС, фотока...","OS":"iOS","price":35500,"availability":true,"novelty":true,"bestseller":true},{"brend":"Sony","model":"Xperia Z3 Compact","image":"phones/3.jpg","description":"GSM, LTE-A, смартфон, iOS 8, вес 129 г, ШхВхТ 67x138.1x9 мм, экр 4.7\", 750x1334, Bluetooth, NFC, Wi-FiPS, ГЛОНАСС, фотока...","OS":"Android","price":2190,"availability":true,"novelty":true,"bestseller":false},{"brend":"Apple","model":"iPhone 5S 16Gb","image":"phones/4.jpg","description":"GSM, LTE, смартфон, iOS 7, вес 112 г, ШхВхТ 58.6x123.8x7.6 мм, экран 4\", 61136, Bluetooth, Wi-Fi, GPS, ГЛОНАСС, фотокама..","OS":"iOS","price":24990,"availability":true,"novelty":false,"bestseller":false},{"brend":"Samsung","model":"Galaxy S5 SM-G900F 16Gb","image":"phones/5.jpg","description":"GSM, LTE-A, смартфон, Android 4.4, вес 145 г, ШхВхТ 72.5x142x8.1 мм, экран 5.1\", 1080x19, Bluetooth, NFC, Wi-Fi..","OS":"Android","price":26237,"availability":true,"novelty":false,"bestseller":false},{"brend":"Sony","model":"Xperia Z1 Compact","image":"phones/6.jpg","description":"GSM, LTE, смартфон, iOS 7, вес 112 г, ШхВхТ 58.6x123.8x7.6 мм, ан 4\", 640x1136, Bluetooth, Wi-Fi, GPГЛОНАСС, фотокамера..","OS":"Android","price":19032,"availability":false,"novelty":false,"bestseller":false},{"brend":"Samsung","model":"Galaxy S4 GT-I9500 16Gb","image":"phones/7.jpg","description":"GSM, LTE-A, смартфон, iOS 8, вес 129 г, ШхВхТ 67x138..9 мм, экран 4.7\", 750x1334, Bluetooth, NFC, Wi- GPS, ГЛОНАСС, фотока...","OS":"Android","price":16900,"availability":true,"novelty":false,"bestseller":false},{"brend":"LG","model":"Nexus 5 16Gb","image":"phones/8.jpg","description":"GSM, LTE-A, смартфон, iOS 8, вес 129 г, ШхВхТ 67x138.1x6.9, экран 4.7\", 750x1334, Bluetooth, NFC, Wi-Fi,S, ГЛОНАСС, фотока...","OS":"Android","price":15350,"availability":true,"novelty":false,"bestseller":false},{"brend":"Sony","model":"Xperia Z1 Compact","image":"phones/9.jpg","description":"GSM, LTE, смартфон, iOS 7, вес 112 г, ШхВхТ 58.6x123.8x7.6 мм, ан 4\", 640x1136, Bluetooth, Wi-Fi, GPГЛОНАСС, фотокамера..","OS":"Android","price":19032,"availability":true,"novelty":false,"bestseller":false},{"brend":"Apple","model":"iPhone 6 Plus 64Gb","image":"phones/10.jpg","description":"GSM, LTE-A, смартфон, Android 4.4, вес 145 г, ШхВхТ 72.5x14.1 мм, экран 5.1\", 1080x1920, Bluetooth, NFC-Fi, GPS, ГЛОНАСС, фотокам...","OS":"iOS","price":48990,"availability":false,"novelty":true,"bestseller":true}],
+      }
+    </script>
+    <script type="text/javascript" src="assets/js/vendor/vue.min.js"></script>
+    <script type="text/javascript" src="assets/js/script.js"></script>
+  </body>
+</html>
